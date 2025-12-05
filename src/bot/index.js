@@ -9,7 +9,7 @@ const uploadHandler = require('./handlers/upload.handler');
 const records = require('./handlers/record.handler')
 const { message } = require('telegraf/filters');
 
-const BOT_TOKEN = '';
+const BOT_TOKEN = '8114621947:AAH24r_XH42bcFvoKaY-V_cSy4lu3pXu1Co';
 if (!BOT_TOKEN) {
   console.error('ERROR: BOT_TOKEN not set in .env');
   process.exit(1);
@@ -96,6 +96,7 @@ function formatPrescription(p) {
 👓 *Lens Type:* ${p.lens_type}
 📏 *PD:* ${p.pd}
 📝 *Notes:* ${p.notes || 'None'}
+📝 *Message:* ${p.content || 'None'}
 ⏱ *Created:* ${created}
   `.trim();
 }

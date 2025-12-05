@@ -1,12 +1,12 @@
 const pool = require('./connection');
 
 /**
- * Users
+ * tg_users
  */
 async function createUser(userData) {
   const { telegram_id, full_name, phone, email } = userData;
   const [result] = await pool.execute(
-    `INSERT INTO users (telegram_id, full_name, phone, email)
+    `INSERT INTO tg_users (telegram_id, full_name, phone, email)
      VALUES (?, ?, ?, ?)`,
     [telegram_id, full_name, phone || null, email || null]
   );
@@ -15,7 +15,7 @@ async function createUser(userData) {
 
 async function findUserByTelegramId(telegramId) {
   const [rows] = await pool.execute(
-    `SELECT * FROM users WHERE telegram_id = ? LIMIT 1`,
+    `SELECT * FROM tg_users WHERE telegram_id = ? LIMIT 1`,
     [telegramId]
   );
   return rows.length ? rows[0] : null;
@@ -23,7 +23,7 @@ async function findUserByTelegramId(telegramId) {
 
 async function updateUserProfile(telegramId,fullName, phone, email) {
   await pool.execute(
-  `UPDATE users 
+  `UPDATE tg_users 
    SET full_name = ?, phone = ?, email = ? 
    WHERE telegram_id = ?`,
   [fullName, phone, email, telegramId]
